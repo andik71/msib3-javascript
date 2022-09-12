@@ -1,0 +1,73 @@
+<script language="javascript"> 
+    // Deklarasi Variabel | @andika-dwiyanto, 2022. All rights reserved
+    var nama_pegawai = "Ridwan", jabatan = 'Manager', status = 'Menikah';
+
+    // If-Else 
+    if (jabatan == 'Manager') {
+        gajiPokok = 1500000;
+    }
+    else if (jabatan == 'Asisten Manajer') {
+        gajiPokok = 1000000;
+    }
+    else if (jabatan == 'Staff') {
+        gajiPokok = 5000000;
+    }
+    else {
+        gajiPokok = 0;
+    }
+
+    // Operator | Deklarasi Variabel
+    let tunjanganJabatan = 0.15 * gajiPokok;
+    let bpjs = 0.1 * gajiPokok;
+    // Ternary = (contidion) ? expression1 : expression2;
+    let tunjanganKeluarga = (status == 'Menikah') ? 0.20 * gajiPokok : 0;
+
+    // Jumlah total keseluruhan
+    let totalGaji = gajiPokok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+
+    // Output
+    document.write(`
+
+    <h3>
+        Name    : ${nama_pegawai} <br>
+        Jabatan : ${jabatan} <br>
+        Status  : ${status} <br>
+    </h2>
+
+    <table border="1" cellpadding="5" cellspacing="2">
+        <thead bgcolor="lightblue">
+            <tr>
+                <th>Data Gaji</th>
+                <th>Nominal Gaji</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gaji Pokok</td>
+                <td align="center">${gajiPokok}</td>
+            </tr>
+            <tr>
+                <td>Tunjangan Jabatan</td>
+                <td align="center">${tunjanganJabatan}</td>
+            </tr>
+            <tr>
+                <td>Tunjangan Keluarga</td>
+                <td align="center">${tunjanganKeluarga}</td>
+            </tr>
+            <tr>
+                <td>BPJS</td>
+                <td align="center">${bpjs}</td>
+            </tr>
+        </tbody>
+        <tfoot bgcolor="lightgray">
+            <tr>
+                <td><b>Total Gaji</b></td>
+                <td align="center"><b>${totalGaji}</b></td>
+            </tr>
+        </tfoot>
+    </table>
+    <p>@andika-dwiyanto, 2022. All rights reserved</p>
+    
+    `)
+
+</script>
