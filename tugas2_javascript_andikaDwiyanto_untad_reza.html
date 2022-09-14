@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 2 - Javascript - Andika Dwiyanto</title>
+
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+
+<body bgcolor="#121212">
+
+    <!-- Header -->
+    <font color="white">
+        <h2 align="center">DAFTAR PEGAWAI</h3>
+    </font>
+
+    <!-- Tabel Daftar Pegawai -->
+    <table align="center" cellpadding="5" width="100%">
+        <thead>
+            <tr bgcolor="LightSalmon">
+                <th>#</th>
+                <th>Nama</th>
+                <th>Jabatan</th>
+                <th>Agama</th>
+                <th>Gaji Pokok</th>
+                <th>Tunjangan Jabatan</th>
+                <th>Tunjangan Kesehatan</th>
+                <th>Gaji Kotor</th>
+                <th>Zakat Profesi</th>
+                <th>Take Home Pay</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <script>
+                // Deklarasi variabel
+                let no, jabatan;
+                // For Loops
+                for (let no = 1; no <= 100; no++) {
+                    // If-Else Multikondisi variabel jabatan
+                    if (no > 75 && no <= 100) {
+                        jabatan = 'Staff';
+                    }
+                    else if (no > 50 && no <= 100) {
+                        jabatan = 'Supervisor';
+                    }
+                    else if (no > 25 && no <= 100) {
+                        jabatan = 'Asisten Manager';
+                    }
+                    else {
+                        jabatan = 'Manager';
+                    }
+
+                    // Switch-Case untuk menentukan Gaji Pokok
+                    let gajiPokok = 0;
+                    switch (jabatan) {
+                        case 'Manager': gajiPokok = 15000000; break;
+                        case 'Asisten Manager': gajiPokok = 10000000; break;
+                        case 'Supervisor': gajiPokok = 7000000; break;
+                        case 'Staff': gajiPokok = 4000000; break;
+                        default: break;
+                    }
+
+                    // Ternary untuk memisah Pegawai Ganjil dan Genap
+                    let warna = (no % 2 == 0) ? 'LightSkyBlue' : 'Gold';
+                    let agama = (no % 2 == 0) ? 'Muslim' : 'Non Muslim';
+                    //  Operator untuk menghitung Tunjangan serta Gaji Kotor
+                    let tunjanganJabatan = gajiPokok * 0.2;
+                    let tunjanganKesehatan = gajiPokok * 0.1;
+                    let gajiKotor = gajiPokok + tunjanganJabatan + tunjanganKesehatan;
+
+                    // Ternary | Jika pegawai muslim dengan gaji kotor minimal 7jt. Maka ada Zakat Profesi sebanyak 2.5% dari Gaji Kotor
+                    let zakatProfesi = (agama == 'Muslim' && gajiKotor >= 7000000) ? gajiKotor * 2.5 / 100 : 0;
+                    homePay = gajiKotor - zakatProfesi;
+
+                    // Output
+                    document.write(`
+                
+<tr align="center" bgcolor="${warna}">
+    <td>${no}.</td>
+    <td align="left">Pegawai ${no}</td>
+    <td align="left">${jabatan}</td>
+    <td align="left">${agama}</td>
+    <td align="right">Rp.${gajiPokok}</td>
+    <td align="right">Rp.${tunjanganJabatan}</td>
+    <td align="right">Rp.${tunjanganKesehatan}</td>
+    <td align="right">Rp.${gajiKotor}</td>
+    <td align="right">Rp.${zakatProfesi}</td>
+    <td align="right">Rp.${homePay}</td>
+</tr>
+                
+                `)
+                }
+
+            </script>
+
+        </tbody>
+    </table>
+
+    <font size="2" color="gray">
+        <p align="center">
+            @andika-dwiyanto, 2022. All rights reserved
+        </p>
+    </font>
+
+</body>
+
+</html>
