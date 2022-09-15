@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 3 - Javascript - Andika Dwiyanto</title>
+
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #header {
+            margin-top: 50px;
+            margin-bottom: 45px;
+        }
+    </style>
+
+    <script>
+        // Array Mahasiswa dengan dua key {[nama], [nilai]};
+        let mahasiswa = [
+            { nama: "Lyl Salmonela", nilai: 74 },
+            { nama: "Raihan Pedo", nilai: 56 },
+            { nama: "Andika Dwiyanto", nilai: 89 },
+            { nama: "Bang Farid", nilai: 91 },
+            { nama: "Aini", nilai: 98 },
+            { nama: "Satria Baja Ringan", nilai: 67 },
+            { nama: "Uzumaki Rizki", nilai: 84 },
+            { nama: "Lord Uciha David", nilai: 0 },
+            { nama: "Habib Cum", nilai: 87 },
+            { nama: "Han Predator", nilai: 74 }
+        ];
+    </script>
+</head>
+
+<body bgcolor="#121212">
+
+    <!-- Header -->
+    <font color="white">
+        <h2 id="header" align="center">DAFTAR PEGAWAI</h3>
+    </font>
+    <!-- Tabel nilai mahasiswa -->
+    <table align="center" cellpadding="10" width="50%">
+        <thead>
+            <tr bgcolor="tomato">
+                <th>#</th>
+                <th>NAMA</th>
+                <th>NILAI</th>
+                <th>KETERANGAN</th>
+                <th>GRADE</th>
+                <th>PREDIKAT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Main Script -->
+            <script language="javascript">
+                let no = 1;
+                // For of sections
+                for (m of mahasiswa) {
+                    // Ternary untuk menentukan lulus dan gagal pada data nilai mahasiswa
+                    let desc = (m.nilai >= 60) ? "Lulus" : "Gagal";
+                    // Operator if-else | digunakan untuk menentukan nilai (A, B, D, C, dan E)
+                    var grade;
+                    if (m.nilai > 85 && m.nilai <= 100) {
+                        grade = 'A';
+                    }
+                    else if (m.nilai > 75 && m.nilai <= 85) {
+                        grade = 'B';
+                    }
+                    else if (m.nilai > 65 && m.nilai <= 75) {
+                        grade = 'C';
+                    }
+                    else if (m.nilai > 45 && m.nilai <= 65) {
+                        grade = 'D';
+                    }
+                    else {
+                        grade = 'E'
+                    }
+
+                    // Switch-Case | Digunakan untuk memberi keterangan pada nilai (Grade)
+                    // Jika A = Memuaskan, B=Bagus, C=Cukup, D=kurang, E=Buruk
+                    let predicate = 'null';
+                    switch (grade) {
+                        case 'A': predicate = 'Memuaskan'; break;
+                        case 'B': predicate = 'Bagus'; break;
+                        case 'C': predicate = 'Cukup'; break;
+                        case 'D': predicate = 'Kurang'; break;
+                        case 'E': predicate = 'Buruk'; break;
+
+                        default:
+                            break;
+                    }
+
+                    // Ternary | Digunakan untuk memisah antara baris ganjil dan genap dengan warna
+                    let row_color = (no % 2 == 0) ? 'LightSkyBlue' : 'Gold';
+
+                    //set warna-warni baris ganjil & genap
+                    document.write(`<tr align="center" bgcolor="${row_color}">
+                        <td>${no++}.</td>
+                        <td align="left">${m.nama}</td>
+                        <td>${m.nilai}</td>
+                        <td>${desc}</td>
+                        <td>${grade}</td>
+                        <td>${predicate}</td>
+                    </tr>`);
+                }
+            </script>
+        </tbody>
+    </table>
+
+    <br>
+
+    <!-- Footer -->
+    <font size="2" color="gray">
+        <p align="center">
+            @andika-dwiyanto, 2022. All rights reserved
+        </p>
+    </font>
+
+</body>
+
+</html>
