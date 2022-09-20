@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>andikDwiyanto - Data Gempa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container col-lg-12 col-md-9 px-2 my-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Data Informasi Gempa</h2>
+                <h6 class="card-subtitle mb-2 text-muted">Palu, Sulawesi Tengah</h6>
+                
+                    <!-- Table Section -->
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="bg-dark text-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Lokasi</th>
+                                <th>Longitude</th>
+                                <th>Latitude</th>
+                                <th>Waktu Peristiwa</th>
+                                <th>Skala</th>
+                                <th>Dampak</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <!-- Output -->
+                        <tbody id="myTable">
+
+                        </tbody>
+                        <tfoot>
+                            <td colspan="8" class="text-center text-muted small">@andika-Dwiyanto, 2022. All rights
+                                reserved</td>
+                        </tfoot>
+                    </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Chainlink external javascript -->
+    <script>
+
+        let no = 1;
+
+        // Class Construct
+        class dataGempa {
+            constructor(lokasi, lat, long, waktu, skala) {
+                this.lokasi = lokasi;
+                this.lat = lat;
+                this.long = long;
+                this.waktu = waktu;
+                this.skala = parseFloat(skala);
+            }
+
+            getTsunami() {
+                // Ternary
+                this.status = this.skala >= 7 ? 'Berpotensi tsunami' : 'Tidak berpotensi tsunami';
+                return this.status;
+            }
+
+            getDampak() {
+                // If-Else
+                if (this.skala >= 6 && this.skala <= 10) {
+                    this.dampak = 'Bangunan roboh';
+                }
+                else if (this.skala >= 4 && this.skala <= 6) {
+                    this.dampak = 'Bangunan retak-retak';
+                }
+                else if (this.skala >= 2 && this.skala <= 4) {
+                    this.dampak = 'Dampaknya tidak terasa';
+                }
+                else {
+                    this.dampak = 'Tidak ada Kerugian';
+                }
+
+                return this.dampak;
+            }
+
+            infoGempa() {
+                document.getElementById('myTable').innerHTML +=
+                    (
+                        `
+                <tr>
+                    <td class="text-center text-muted">${no++}.</td>
+                    <td>${this.lokasi}</td>
+                    <td>${this.lat}</td>
+                    <td>${this.long}</td>
+                    <td>${this.waktu}</td>
+                    <td class="text-center">${this.skala}</td>
+                    <td>${this.getDampak()}</td>
+                    <td>${this.getTsunami()}</td>
+                </tr>
+                `
+                    );
+            }
+        } // End Class
+
+
+        // OOP
+        // Instance Object from Class Construct
+
+        let gempa = [
+            { lokasi: 'KEP-MENTAWAI-SUMBAR', latitude: '-2.05', longitude: '5.1', waktu: '21.21.19 WIB', skala: 5.2 },
+            { lokasi: 'MAMBERAMOTENGAH-PAPUA', latitude: '-1.22', longitude: '5.1', waktu: '07.11.18 WIB', skala: 9.1 },
+            { lokasi: 'PACITAN-JATIM', latitude: '-11.01', longitude: '5.6', waktu: '09.17.12 WIB', skala: 7 },
+            { lokasi: 'KEP-MENTAWAI-SUMBAR', latitude: '-1.25', longitude: '5.4', waktu: '19.20.21 WIT', skala: 2 },
+            { lokasi: 'MAMBERAMOTENGAH-PAPUA', latitude: '-1.18', longitude: '6.1', waktu: '04.16:11 WIB', skala: 4 },
+            { lokasi: 'MALUKUTENGGARABRT', latitude: '-2.04', longitude: '6.2', waktu: '21:17.16 WIB', skala: 7.7 },
+            { lokasi: 'HALMAHERABARAT-MALUT', latitude: '-2.18', longitude: '6.0', waktu: '18.11:18 WIB', skala: 5.4 },
+            { lokasi: 'MALUKUBRTDAYA', latitude: '-2.02', longitude: '5.9', waktu: '17.30:21 WIB', skala: 8.1 },
+            { lokasi: 'SELUMA-BENGKULU', latitude: '-7.11', longitude: '5.1', waktu: '19.23.01 WIB', skala: 4.2 },
+            { lokasi: 'NIASUTARA-SUMUT', latitude: '2.06', longitude: '5.2', waktu: '12.02.31 WIB', skala: 2 },
+            { lokasi: 'GUNUNGKIDUL-DIY', latitude: '-2.02', longitude: '5.0', waktu: '15.21.42 WIB', skala: 3.1 }
+
+        ];
+
+        // Looping for Array
+        for (const g of gempa) {
+            const gempaks = new dataGempa(g.lokasi, g.latitude, g.longitude, g.waktu, g.skala);
+            gempaks.infoGempa(); // Show infoGempa
+        }
+
+        /*
+            g1 = new dataGempa('Petobo','-09.2212','2043.23','09:21 AM', 5);
+            g2 = new dataGempa('Petobo1','-09.2212','2043.23','09:21 AM', 5);
+            g3 = new dataGempa('Petobo2','-09.2212','2043.23','09:21 AM', 5);
+            g4 = new dataGempa('Petobo3','-09.2212','2043.23','09:21 AM', 5);
+            g5 = new dataGempa('Petobo4','-09.2212','2043.23','09:21 AM', 5);
+        */
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
